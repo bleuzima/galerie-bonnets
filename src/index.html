@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Bonnets — Galerie</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Bonnets</h1>
+      <p>Touchez un numéro pour voir les photos</p>
+    </header>
+
+    <main>
+      <ol class="grid" id="grid" aria-label="Bonnets de 01 à 100"></ol>
+    </main>
+
+    <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+      <div class="viewer__bar">
+        <h2 id="viewer-title">N° <span id="viewer-num"></span></h2>
+        <span class="viewer__price" id="viewer-price"></span>
+        <button class="viewer__close" id="viewer-close" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <div class="viewer__stage">
+        <button class="viewer__nav viewer__nav--prev" id="viewer-prev" type="button" aria-label="Photo précédente">‹</button>
+        <div class="viewer__track" id="viewer-track"></div>
+        <button class="viewer__nav viewer__nav--next" id="viewer-next" type="button" aria-label="Photo suivante">›</button>
+      </div>
+
+      <div class="viewer__footer">
+        <div class="viewer__dots" id="viewer-dots"></div>
+        <span class="viewer__count" id="viewer-count" aria-live="polite"></span>
+      </div>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

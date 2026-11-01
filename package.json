@@ -1,0 +1,11 @@
+{
+  "name": "galerie-bonnets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Galerie de 100 bonnets — site statique, aucune dépendance.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs"
+  }
+}
