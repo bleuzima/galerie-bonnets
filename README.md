@@ -1,6 +1,10 @@
 # Galerie de bonnets
 
-Galerie de 100 bonnets numérotés de 01 à 100. Un clic sur une case ouvre une pop-up avec les photos du bonnet (flèches ou swipe).
+Galerie de 100 bonnets numérotés de 01 à 100, classés en 3 groupes :
+**CH4T** (01–45), **FL3UR** (46–80) et **8ULL3** (81–100).
+Les groupes (nom et nombre de cases) se modifient en haut de `src/app.js` (`GROUPS`).
+
+Un clic sur une case ouvre une pop-up avec les photos du bonnet (flèches ou swipe).
 Site 100 % statique, sans base de données ni dépendance : déployé sur Vercel.
 
 ## Ajouter / changer les photos

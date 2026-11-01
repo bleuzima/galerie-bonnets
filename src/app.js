@@ -1,7 +1,14 @@
 const $ = (id) => document.getElementById(id);
 const pad = (n) => String(n).padStart(2, "0");
 
-const grid = $("grid");
+// Groupes de bonnets : nom + nombre de cases (dans l'ordre, à partir de 01)
+const GROUPS = [
+  { name: "CH4T", size: 45 },
+  { name: "FL3UR", size: 35 },
+  { name: "8ULL3", size: 20 },
+];
+
+const groups = $("groups");
 const viewer = $("viewer");
 const track = $("viewer-track");
 const dots = $("viewer-dots");
@@ -11,12 +18,10 @@ const count = $("viewer-count");
 
 let current = { photos: [], index: 0 };
 
-const { total, bonnets } = await fetch("manifest.json").then((r) => r.json());
+const { bonnets } = await fetch("manifest.json").then((r) => r.json());
 
-// --- Grille -------------------------------------------------------------
-const cells = document.createDocumentFragment();
-for (let i = 1; i <= total; i++) {
-  const id = pad(i);
+// --- Grilles par groupe -------------------------------------------------
+function cell(id) {
   const li = document.createElement("li");
   const btn = document.createElement("button");
   btn.type = "button";
@@ -30,9 +35,33 @@ for (let i = 1; i <= total; i++) {
     btn.setAttribute("aria-label", `Bonnet ${id} — bientôt`);
   }
   li.append(btn);
-  cells.append(li);
+  return li;
 }
-grid.append(cells);
+
+let next = 1;
+for (const { name, size } of GROUPS) {
+  const first = next;
+  const last = next + size - 1;
+  next = last + 1;
+
+  const section = document.createElement("section");
+  section.className = "group";
+  const title = document.createElement("h2");
+  title.className = "group__title";
+  title.textContent = name;
+  const range = document.createElement("span");
+  range.className = "group__range";
+  range.textContent = `${pad(first)} – ${pad(last)}`;
+  title.append(range);
+
+  const grid = document.createElement("ol");
+  grid.className = "grid";
+  grid.setAttribute("aria-label", `${name} : bonnets ${pad(first)} à ${pad(last)}`);
+  for (let i = first; i <= last; i++) grid.append(cell(pad(i)));
+
+  section.append(title, grid);
+  groups.append(section);
+}
 
 // --- Pop-up -------------------------------------------------------------
 function open(id) {
