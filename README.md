@@ -4,22 +4,22 @@ Galerie de 100 bonnets numérotés de 01 à 100, classés en 3 groupes :
 **CH4T** (01–45), **FL3UR** (46–80) et **8ULL3** (81–100).
 Les groupes (nom et nombre de cases) se modifient en haut de `src/app.js` (`GROUPS`).
 
-Un clic sur une case ouvre une pop-up avec les photos du bonnet (flèches ou swipe).
+Chaque case affiche la photo du bonnet, avec son numéro en légende. Un clic ouvre la photo en grand avec le prix.
 Site 100 % statique, sans base de données ni dépendance : déployé sur Vercel.
 
 ## Ajouter / changer les photos
 
-1. Mets les photos d'un bonnet dans le dossier qui porte son numéro :
+1. Mets la photo d'un bonnet dans le dossier qui porte son numéro (une photo par bonnet) :
 
    ```
    photos/
-     01/  1.jpg  2.jpg  3.jpg
-     02/  1.jpg  2.jpg
+     01/  1.jpg
+     02/  1.jpg
      ...
      100/ 1.jpg
    ```
 
-   - Les photos s'affichent dans l'ordre des noms (`1.jpg`, `2.jpg`, … `10.jpg`).
+   - Si un dossier contient plusieurs photos, seule la première (par ordre de nom) est utilisée.
    - Formats acceptés : jpg, jpeg, png, webp, avif, gif, svg.
    - Un dossier vide ou absent = case grisée sur le site.
    - Conseil : réduis les photos à ~1600 px de large (≈ 300 Ko) avant de les ajouter,
