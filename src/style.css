@@ -32,6 +32,11 @@ body {
   font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  line-height: 0;
+}
+.header__logo {
+  width: 96px;
+  height: auto;
 }
 .header p {
   margin: 4px 0 0;
@@ -70,34 +75,52 @@ body {
   padding: 0;
   max-width: 960px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 10px;
 }
 @media (min-width: 560px) {
-  .grid { grid-template-columns: repeat(8, 1fr); gap: 10px; }
+  .grid { grid-template-columns: repeat(5, 1fr); gap: 18px 12px; }
 }
 @media (min-width: 900px) {
-  .grid { grid-template-columns: repeat(10, 1fr); }
+  .grid { grid-template-columns: repeat(8, 1fr); }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.item__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.cell:disabled + .item__label {
+  color: #c4c4c4;
 }
 
 .cell {
   width: 100%;
   aspect-ratio: 1;
-  display: grid;
-  place-items: center;
+  padding: 0;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
-  color: var(--ink);
-  font: inherit;
-  font-size: clamp(1rem, 4.5vw, 1.25rem);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  background: var(--empty);
   cursor: pointer;
   transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
+.cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .cell:hover {
   border-color: var(--ink);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
 }
 .cell:active {
   transform: scale(0.95);
@@ -218,6 +241,7 @@ body {
 .viewer__nav--prev { left: 10px; }
 .viewer__nav--next { right: 10px; }
 .viewer__nav:disabled { opacity: 0; pointer-events: none; }
+.viewer__nav[hidden] { display: none; }
 
 /* Sur écran tactile, on swipe : les flèches restent discrètes */
 @media (hover: none) {

@@ -23,18 +23,29 @@ const { bonnets } = await fetch("manifest.json").then((r) => r.json());
 // --- Grilles par groupe -------------------------------------------------
 function cell(id) {
   const li = document.createElement("li");
+  li.className = "item";
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "cell";
-  btn.textContent = id;
   if (bonnets[id]) {
+    // Miniature = première photo du dossier
+    const img = document.createElement("img");
+    img.src = bonnets[id].photos[0];
+    img.alt = "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    btn.append(img);
     btn.setAttribute("aria-label", `Bonnet ${id}`);
     btn.addEventListener("click", () => open(id));
   } else {
     btn.disabled = true;
     btn.setAttribute("aria-label", `Bonnet ${id} — bientôt`);
   }
-  li.append(btn);
+  const label = document.createElement("span");
+  label.className = "item__label";
+  label.textContent = id;
+  label.setAttribute("aria-hidden", "true");
+  li.append(btn, label);
   return li;
 }
 
@@ -97,7 +108,8 @@ function open(id) {
   );
 
   const single = photos.length < 2;
-  dots.hidden = single;
+  // Une seule photo : pas de flèches, de points ni de compteur
+  dots.hidden = count.hidden = single;
   prevBtn.hidden = nextBtn.hidden = single;
 
   target = null;
