@@ -79,7 +79,7 @@ for (const { name, size } of GROUPS) {
 function open(id) {
   const { photos, prix, vendu } = bonnets[id];
   $("viewer-num").textContent = id;
-  $("viewer-price").textContent = vendu ? "Vendu" : prix ?? "";
+  $("viewer-price").textContent = [prix, vendu && "Vendu"].filter(Boolean).join(" · ");
   viewerImg.src = photos[0];
   viewerImg.alt = `Bonnet ${id}`;
   viewer.showModal();
