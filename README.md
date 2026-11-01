@@ -44,7 +44,6 @@ Site 100 % statique, sans base de données ni dépendance : déployé sur Vercel
 
    Vercel redéploie automatiquement en ~1 minute.
 
-> Les dossiers `photos/01` à `photos/06` contiennent des images d'exemple : remplace-les par tes vraies photos.
 
 ## Voir le site en local
 
