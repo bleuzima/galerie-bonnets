@@ -45,6 +45,16 @@ Site 100 % statique, sans base de données ni dépendance : déployé sur Vercel
    Vercel redéploie automatiquement en ~1 minute.
 
 
+## Marquer un bonnet comme vendu
+
+Ajoute son numéro dans `vendus.json` (la case devient grise avec la mention « Vendu ») :
+
+```json
+["16", "42"]
+```
+
+Pour le remettre en vente, retire son numéro de la liste.
+
 ## Voir le site en local
 
 Nécessite Node.js (aucune installation de paquet).

@@ -118,6 +118,37 @@ body {
   height: 100%;
   object-fit: cover;
 }
+/* Bonnet vendu : voile gris + mention */
+.cell--sold {
+  position: relative;
+}
+.cell--sold img {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+.cell--sold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(120 120 120 / 0.35);
+}
+.cell__sold {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.5);
+}
+.cell--sold + .item__label {
+  color: var(--muted);
+}
+
 .cell:hover {
   border-color: var(--ink);
   box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);

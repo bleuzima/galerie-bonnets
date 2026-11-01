@@ -29,7 +29,14 @@ function cell(id) {
     img.loading = "lazy";
     img.decoding = "async";
     btn.append(img);
-    btn.setAttribute("aria-label", `Bonnet ${id}`);
+    if (bonnets[id].vendu) {
+      btn.classList.add("cell--sold");
+      const tag = document.createElement("span");
+      tag.className = "cell__sold";
+      tag.textContent = "Vendu";
+      btn.append(tag);
+    }
+    btn.setAttribute("aria-label", `Bonnet ${id}${bonnets[id].vendu ? " — vendu" : ""}`);
     btn.addEventListener("click", () => open(id));
   } else {
     btn.disabled = true;
@@ -70,9 +77,9 @@ for (const { name, size } of GROUPS) {
 
 // --- Pop-up : la photo en grand -----------------------------------------
 function open(id) {
-  const { photos, prix } = bonnets[id];
+  const { photos, prix, vendu } = bonnets[id];
   $("viewer-num").textContent = id;
-  $("viewer-price").textContent = prix ?? "";
+  $("viewer-price").textContent = vendu ? "Vendu" : prix ?? "";
   viewerImg.src = photos[0];
   viewerImg.alt = `Bonnet ${id}`;
   viewer.showModal();

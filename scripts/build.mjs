@@ -1,6 +1,6 @@
 // Construit le site dans dist/ :
 //  - copie les fichiers de src/ et le dossier photos/
-//  - génère dist/manifest.json à partir des dossiers photos/01 … photos/100 et de prix.json
+//  - génère dist/manifest.json à partir des dossiers photos/01 … photos/100, de prix.json et de vendus.json
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,6 +23,14 @@ const prix = existsSync(join(ROOT, "prix.json"))
   ? JSON.parse(readFileSync(join(ROOT, "prix.json"), "utf8"))
   : {};
 
+// Bonnets vendus : liste de numéros dans vendus.json, ex. ["16", "42"]
+const vendus = new Set(
+  (existsSync(join(ROOT, "vendus.json"))
+    ? JSON.parse(readFileSync(join(ROOT, "vendus.json"), "utf8"))
+    : []
+  ).map((n) => pad(Number(n))),
+);
+
 const manifest = {};
 for (let i = 1; i <= TOTAL; i++) {
   const id = pad(i);
@@ -36,6 +44,7 @@ for (let i = 1; i <= TOTAL; i++) {
   manifest[id] = {
     photos: photos.map((f) => `photos/${id}/${encodeURIComponent(f)}`),
     prix: prix[id] ?? null,
+    vendu: vendus.has(id),
   };
 }
 
